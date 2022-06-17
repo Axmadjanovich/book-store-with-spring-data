@@ -10,15 +10,13 @@ import uz.yt.springdata.auth.UserRoles;
 import uz.yt.springdata.dao.Authorities;
 import uz.yt.springdata.dao.User;
 import uz.yt.springdata.dto.*;
-import uz.yt.springdata.helper.Validator;
+import uz.yt.springdata.helper.validation.Validator;
 import uz.yt.springdata.helper.constants.AppResponseCode;
 import uz.yt.springdata.helper.constants.AppResponseMessages;
 import uz.yt.springdata.mapping.UserMapping;
-import uz.yt.springdata.repository.AuthoritiesRepository;
 import uz.yt.springdata.repository.UserRepository;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +24,6 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private final AuthoritiesRepository authoritiesRepository;
 
 
     public ResponseDTO<UserDTO> addUser(UserDTO userDTO) {

@@ -14,17 +14,18 @@ import java.math.BigDecimal;
 public class BookDTO {
     private Integer id;
     @NotBlank(message = "Name is empty")
-    @Digits(message = "Is not number", integer = 10, fraction = 2)
     private String name;
     @NotNull(message = "Cost is empty")
     @Min(value = 1000, message = "Less then 1 000 UZS")
     @Max(value = 500000,  message = "More then 500 000 UZS")
+    @Digits(message = "Is not number", integer = 10, fraction = 2)
     private BigDecimal cost;
     @NotBlank(message = "Genre is empty")
     private String genre;
     @Pattern(regexp = "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])",
             message = "PublishedDate is not valid date")    //regex for date
     private String publishedDate;
+    @Digits(message = "pageCount is not valid", integer = 4, fraction = 0)
     private Integer pageCount;
     private AuthorDTO author;
     private PublisherDTO publisherDTO;
