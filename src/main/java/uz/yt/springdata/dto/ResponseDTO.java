@@ -3,13 +3,11 @@ package uz.yt.springdata.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uz.yt.springdata.helper.Validator;
 
 import java.util.List;
-
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class ResponseDTO<T> {
     private boolean success;
     private Integer code;

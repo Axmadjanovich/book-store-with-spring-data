@@ -1,6 +1,8 @@
 package uz.yt.springdata.service;
 
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +21,7 @@ import uz.yt.springdata.helper.StringHelper;
 import uz.yt.springdata.helper.Validator;
 import uz.yt.springdata.helper.constants.AppResponseCode;
 import uz.yt.springdata.helper.constants.AppResponseMessages;
+import uz.yt.springdata.mapping.BookMapper;
 import uz.yt.springdata.mapping.BookMapping;
 import uz.yt.springdata.repository.AuthorRepository;
 import uz.yt.springdata.repository.BookRepository;
@@ -43,7 +46,7 @@ public class BookService {
     private final BookRepositoryImpl bookRepositoryImpl;
     private final AuthorRepository authorRepository;
     private final PublisherRepository publisherRepository;
-
+//    private final BookMapper mapper;
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseDTO<BookDTO> addNew(BookDTO bookDTO){
@@ -52,6 +55,8 @@ public class BookService {
             List<ValidatorDTO> errors = Validator.validateBook(bookDTO);
             if (errors.size() > 0) return new ResponseDTO<>(false, AppResponseCode.VALIDATION_ERROR,
                     AppResponseMessages.VALIDATION_ERROR, bookDTO, errors);
+//            Book b = mapper.toEntity(bookDTO);
+
 
             Book book = BookMapping.toEntity(bookDTO);
             book.setId(null);

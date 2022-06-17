@@ -1,14 +1,15 @@
 package uz.yt.springdata.jwt;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Component
@@ -16,6 +17,8 @@ public class JwtUtil {
 
     @Value("${spring.security.secret.key}")
     private String secretKey;
+
+    private final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 
     public String generateToken(String uuid){
         return Jwts.builder()
@@ -42,7 +45,11 @@ public class JwtUtil {
     public String validateTokenAndGetSubject(String token){
         try {
             return getClaims(token).getSubject();
-        }catch (Exception e){
+        }catch (ExpiredJwtException e){
+            logger.error("Token expired: " + token);
+            return null;
+        }
+        catch (Exception e){
             return null;
         }
     }

@@ -1,10 +1,7 @@
 package uz.yt.springdata.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uz.yt.springdata.dto.ResponseDTO;
 import uz.yt.springdata.dto.UserDTO;
 import uz.yt.springdata.dto.UserLoginDto;
@@ -22,5 +19,10 @@ public class LoginController {
     @PostMapping
     public ResponseDTO<String> login(@RequestBody UserLoginDto userLoginDto, HttpServletRequest request) {
         return userDetailsService.getToken(userLoginDto, request);
+    }
+
+    @GetMapping
+    public String check(){
+        return "Assalomu alaykum";
     }
 }
